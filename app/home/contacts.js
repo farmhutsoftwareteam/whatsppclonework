@@ -79,18 +79,18 @@ const ContactsComponent = () => {
   };
 
   return (
-    <Box>
+    <Box p={10}>
       <TextInput
         placeholder="Search contacts..."
         value={searchInput}
         onChangeText={setSearchInput}
-        style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10 }}
+        style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10 , borderRadius: 5}}
       />
       <FlatList
-        data={filteredContacts}
-        keyExtractor={(item) => `${item.id}-${item.name}`}
-        renderItem={renderItem}
-      />
+    data={filteredContacts}
+    keyExtractor={(item, index) => `${item.id}-${item.name}-${index}`}
+    renderItem={renderItem}
+  />
     </Box>
   );
 };

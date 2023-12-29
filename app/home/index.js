@@ -12,7 +12,7 @@ const Home = () => {
 
   
   return (
-    <Box flex={1}>
+    <Box flex={1} bg='white'>
     
         <Box h="$1/6" mb={0}>
         <Header />

@@ -3,6 +3,8 @@ import { Button, Input, VStack, Text, Heading, InputField } from '@gluestack-ui/
 import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { supabase } from '../config/supabase';
 import { router} from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const AuthForm = () => {
   const [phone, setPhone] = useState('');
@@ -23,11 +25,17 @@ const AuthForm = () => {
   };
 
   const handleVerifyOtp = async () => {
+    console.log('handleVerifyOtp called'); // Add this line
     setLoading(true);
-    const { data , error } = await supabase.auth.verifyOtp({ phone, token: otp ,type:'sms' });
+    const { data : {session}, error } = await supabase.auth.verifyOtp({ phone, token: otp ,type:'sms' });
+    console.log('Error:', error); // Add this line
+    console.log('Session:', session); // Add this line
     if (error) {
       Alert.alert(error.message);
-    } else if (data?.session) {
+    } else if (session) {
+      console.log('Session:', session); // Log the session
+      await AsyncStorage.setItem('supabase.auth.token', JSON.stringify(session));
+
       Alert.alert('Successfully signed in');
       router.replace('/home');
     }

@@ -11,6 +11,7 @@ import {
 import { useLocalSearchParams } from 'expo-router';
 import { useChatContext } from '../../contexts/ChatContext';
 import { supabase } from '../../config/supabase';
+import { Send } from 'lucide-react-native';
 
 const ChatScreen = ({ route }) => {
   const { setChatHeaderInfo } = useChatContext();
@@ -228,7 +229,7 @@ const ChatScreen = ({ route }) => {
                 borderRadius: 5,
               }}
             >
-              <Text style={{ color: 'white' }}>Send</Text>
+              <Send  color='white'/>
             </View>
           </TouchableOpacity>
         </View>
